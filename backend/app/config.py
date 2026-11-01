@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    app_name: str = "NotADegenerateAPI"
+    app_name: str = "DailyTrackerAPI"
     cors_allow_origins: list = ["*"]
 
     debug: bool = False

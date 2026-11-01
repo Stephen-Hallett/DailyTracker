@@ -23,10 +23,10 @@ jobs:
       - name: Redeploy App
         run: |
           ssh -o "StrictHostKeyChecking no" ${{ secrets.VPS_USER }}@dietpi "
-            if [ ! -d /home/stephen/NotADegenerate/.git ]; then
-                git clone https://github.com/Stephen-Hallett/NotADegenerate.git /root/NotADegenerate;
+            if [ ! -d /home/stephen/DailyTracker/.git ]; then
+                git clone https://github.com/Stephen-Hallett/DailyTracker.git /root/DailyTracker;
             fi \
-            && cd /root/NotADegenerate \
+            && cd /root/DailyTracker \
             && git pull \
             && printf \"%s\" \"${{ secrets.ENV }}\" > .env \
             && docker compose up -d --build

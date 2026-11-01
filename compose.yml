@@ -39,7 +39,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    container_name: NADAPI
+    container_name: DTAPI
     depends_on:
       db:
         condition: service_healthy
@@ -72,4 +72,4 @@ volumes:
 
 networks:
   default:
-    name: nad_network
+    name: dt_network
