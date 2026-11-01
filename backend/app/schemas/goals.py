@@ -8,3 +8,7 @@ class Goal(BaseModel):
     name: str
     record_start: datetime
     record_end: datetime
+
+
+class GoalName(BaseModel):
+    name: str

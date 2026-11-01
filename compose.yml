@@ -2,7 +2,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: db/Dockerfile
+      dockerfile: database/Dockerfile
     container_name: ${POSTGRES_DB}
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -13,8 +13,7 @@ services:
       - "${POSTGRES_PORT}:5432"
     volumes:
       - ${DB_DATA_PATH:-./db_data}:/var/lib/postgresql/data
-      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-      - ./data/trips.csv:/docker-entrypoint-initdb.d/trips.csv:ro
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
@@ -40,7 +39,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    container_name: BusAPI
+    container_name: NADAPI
     depends_on:
       db:
         condition: service_healthy
@@ -50,10 +49,6 @@ services:
       POSTGRES_PW: ${POSTGRES_PW}
       POSTGRES_HOST: ${POSTGRES_DB}
       POSTGRES_PORT: 5432
-      SUBSCRIPTION_KEY: ${SUBSCRIPTION_KEY}
-      SAVE_TIME: ${SAVE_TIME}
-      UPDATE_TRIPS_TIME: ${UPDATE_TRIPS_TIME}
-      JOURNEYS: ${JOURNEYS}
 
     ports:
       - "${BACKEND_PORT}:8000"

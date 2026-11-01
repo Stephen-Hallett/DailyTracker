@@ -1,12 +1,11 @@
 import logging
-import os
 
 import pytz
-from sqlalchemy import select
 
+from ..models.models import Goal
+from ..schemas.goals import GoalName
 from ..utils.db import BaseDatabase
 from ..utils.logger import MyLogger, log
-from ..schemas.goals import Goal
 
 
 class Controller(BaseDatabase):
@@ -17,9 +16,7 @@ class Controller(BaseDatabase):
         self.tz: pytz.BaseTzInfo = pytz.timezone("Pacific/Auckland")
 
     @log
-    def create_goal(self, goal: Goal) -> None:
+    def create_goal(self, goal: GoalName) -> None:
         with self.get_session() as session:
-            session.add(Goal(**goal.model_dump()))
+            session.add(Goal(goal_name=goal.name))
             session.commit()
-    
-    

@@ -1,8 +1,8 @@
 import pytz
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter
 
 from ..api.actions import Controller
-from ..schemas.actions import Action
+from ..schemas.actions import TriggerAction
 from ..utils.logger import MyLogger
 
 logger = MyLogger().get_logger()
@@ -15,5 +15,5 @@ router = APIRouter()
 
 
 @router.post("")
-async def submit_action(action: Action) -> None:
+async def submit_action(action: TriggerAction) -> None:
     return con.submit_action(action)
