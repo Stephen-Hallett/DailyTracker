@@ -12,3 +12,9 @@ class Goal(BaseModel):
 
 class GoalName(BaseModel):
     name: str
+
+
+class GoalStatus(BaseModel):
+    id: int
+    name: str
+    completed: bool
