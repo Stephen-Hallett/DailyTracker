@@ -23,7 +23,7 @@ jobs:
       - name: Redeploy App
         run: |
           ssh -o "StrictHostKeyChecking no" ${{ secrets.VPS_USER }}@dietpi "
-            if [ ! -d /home/stephen/DailyTracker/.git ]; then
+            if [ ! -d /root/DailyTracker/.git ]; then
                 git clone https://github.com/Stephen-Hallett/DailyTracker.git /root/DailyTracker;
             fi \
             && cd /root/DailyTracker \
