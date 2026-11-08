@@ -17,3 +17,8 @@ router = APIRouter()
 @router.post("")
 async def submit_action(action: TriggerAction) -> None:
     return con.submit_action(action)
+
+
+@router.get("/dailycount")
+async def daily_count() -> int:
+    return con.dailycount()
